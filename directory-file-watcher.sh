@@ -27,7 +27,6 @@ echo "finished initial indexing"
 
 # checking files checksum
 while [ 1 ]; do
-    sleep 60
     echo "checking for updates"
     addUpdate=()
     deleteUpdate=()
@@ -90,14 +89,27 @@ while [ 1 ]; do
         fi
     done
     # updating tracking array
-    for del in ${deleteUpdate[@]}
+    for del in "${deleteUpdate[@]}"
     do
         arr=("${arr[@]/$del}") 
     done
-    for ad in ${addUpdate[@]}
+    # try to re allocate spaces that are deleted if no spaces found than do new allocation
+    for ad in "${addUpdate[@]}"
     do
-        arr+=("$ad") 
+        flg=false
+        ind=0
+        for q in "${arr[@]}"; do
+            if [ "$q" = "" ]; then
+                arr[ind]=$ad
+                flg=true
+                break
+            fi
+            ind+=1
+        done
+        if [ $flg = false ]; then
+            arr+=("$ad") 
+        fi
     done
-    echo "${arr[@]}"
+    sleep 60
     echo "completed next watch will be after 60 seconds"
 done
