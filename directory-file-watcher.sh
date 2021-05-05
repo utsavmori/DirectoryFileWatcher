@@ -92,11 +92,11 @@ while [ 1 ]; do
     # updating tracking array
     for del in ${deleteUpdate[@]}
     do
-        arr=("${arr[@]/$del}") #Quotes when working with strings
+        arr=("${arr[@]/$del}") 
     done
     for ad in ${addUpdate[@]}
     do
-        arr+=("$ad") #Quotes when working with strings
+        arr+=("$ad") 
     done
     echo "${arr[@]}"
     echo "completed next watch will be after 60 seconds"
