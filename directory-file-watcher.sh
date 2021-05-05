@@ -27,6 +27,7 @@ echo "finished initial indexing"
 
 # checking files checksum
 while [ 1 ]; do
+    sleep 60
     echo "checking for updates"
     addUpdate=()
     deleteUpdate=()
@@ -110,6 +111,5 @@ while [ 1 ]; do
             arr+=("$ad") 
         fi
     done
-    sleep 60
     echo "completed next watch will be after 60 seconds"
 done
